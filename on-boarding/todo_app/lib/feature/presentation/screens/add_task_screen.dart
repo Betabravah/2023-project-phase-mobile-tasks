@@ -64,6 +64,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
+                key: const Key('title_text_field'),
                 controller: _titleController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -74,6 +75,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
+                key: const Key('description_text_field'),
                 controller: _descriptionController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -84,11 +86,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
+                key: const Key('date_text_field'),
                 controller: _dateController,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: 'Date',
                   suffixIcon: GestureDetector(
+                    key: const Key('date_picker_icon'),
                     onTap: _selectDate, // Show the date picker on tap
                     child: const Icon(Icons.calendar_today),
                   ),
@@ -98,6 +102,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
+                key: const Key('priority_text_field'),
                 controller: _priorityController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),

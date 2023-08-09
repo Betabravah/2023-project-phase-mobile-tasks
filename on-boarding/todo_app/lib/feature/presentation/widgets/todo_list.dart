@@ -17,7 +17,9 @@ class _TodoListState extends State<TodoList> {
   _TodoListState(this.tasks);
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 8.0),
+        height: 200.0,
       child: ListView.builder(
         itemCount: widget.tasks!.length,
         itemBuilder: (context, index) {

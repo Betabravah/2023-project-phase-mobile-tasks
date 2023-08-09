@@ -4,7 +4,6 @@ import 'package:todo_app/feature/presentation/screens/add_task_screen.dart';
 import '../widgets/todo_list.dart';
 import '../../domain/task.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -14,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Task> tasks = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
