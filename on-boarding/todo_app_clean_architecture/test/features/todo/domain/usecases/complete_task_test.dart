@@ -22,6 +22,7 @@ void main() {
     title: "Test Title",
     description: "Test Description",
     dueDate: DateTime.now(),
+    isCompleted: true,
   );
 
   test('should complete a task from repository', () async {

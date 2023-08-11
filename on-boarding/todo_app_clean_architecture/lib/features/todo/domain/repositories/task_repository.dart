@@ -9,4 +9,5 @@ abstract class TaskRepository {
   Future<Either<Failure, Task>> updateTask(Task task);
   Future<Either<Failure, Task>> completeTask(int id);
   Future<Either<Failure, Task>> removeTask(int id);
+  Future<Either<Failure, List<Task>>> viewAllTasks();
 }
