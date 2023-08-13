@@ -10,7 +10,7 @@ void main() {
     id: 1,
     title: "Test Title",
     description: "Test Description",
-    dueDate: DateTime.now(),
+    dueDate: DateTime.parse('2019-01-01T00:00:00.000'),
   );
 
   test(
@@ -25,7 +25,7 @@ void main() {
       final Map<String, dynamic> jsonMap = json.decode(fixture('task.json'));
 
       final result = TaskModel.fromJson(jsonMap);
-      expect(result, TaskModel);
+      expect(result, tTaskModel);
     });
   });
 

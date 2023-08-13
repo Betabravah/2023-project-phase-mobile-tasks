@@ -7,4 +7,6 @@ abstract class TaskLocalDataSource {
   Future<TaskModel> completeTask(int id);
   Future<TaskModel> removeTask(int id);
   Future<List<TaskModel>> viewAllTasks();
+  Future<void> cacheTask(TaskModel taskToCache);
+
 }

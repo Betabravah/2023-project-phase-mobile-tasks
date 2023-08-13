@@ -1,5 +1,7 @@
 import '../../domain/entities/task.dart';
 
+part 'task_mapper.dart';
+
 class TaskModel extends Task {
   TaskModel({
     required int id,
@@ -28,7 +30,7 @@ class TaskModel extends Task {
       "id": id,
       "title": title,
       "description": description,
-      "dueDate": dueDate,
+      "dueDate": dueDate.toIso8601String(),
       "isCompleted": isCompleted
     };
   }
