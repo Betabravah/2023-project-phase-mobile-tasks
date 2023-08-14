@@ -11,6 +11,7 @@ void main() {
     title: "Test Title",
     description: "Test Description",
     dueDate: DateTime.parse('2019-01-01T00:00:00.000'),
+    isCompleted: true
   );
 
   test(
@@ -37,7 +38,7 @@ void main() {
         "title": "Test Title",
         "description": "Test Description",
         "dueDate": "2019-01-01T00:00:00.000",
-        "isCompleted": false
+        "isCompleted": true
       };
       expect(result, expectedMap);
     });

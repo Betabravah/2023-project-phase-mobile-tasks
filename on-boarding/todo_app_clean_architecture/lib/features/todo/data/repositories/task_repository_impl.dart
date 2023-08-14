@@ -20,10 +20,6 @@ class TaskRepositoryImpl implements TaskRepository {
     required this.networkInfo,
   });
 
-  @override
-  Future<Either<Failure, Task>> completeTask(int id) async {
-    throw UnimplementedError();
-  }
 
   @override
   Future<Either<Failure, Task>> createTask(Task task) async {
