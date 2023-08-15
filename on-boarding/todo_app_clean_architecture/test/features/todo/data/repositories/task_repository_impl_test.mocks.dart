@@ -90,21 +90,7 @@ class MockTaskRemoteDataSource extends _i1.Mock
         )),
       ) as _i4.Future<_i2.TaskModel>);
   @override
-  _i4.Future<_i2.TaskModel> completeTask(int? id) => (super.noSuchMethod(
-        Invocation.method(
-          #completeTask,
-          [id],
-        ),
-        returnValue: _i4.Future<_i2.TaskModel>.value(_FakeTaskModel_0(
-          this,
-          Invocation.method(
-            #completeTask,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i2.TaskModel>);
-  @override
-  _i4.Future<_i2.TaskModel> removeTask(int? id) => (super.noSuchMethod(
+  _i4.Future<_i2.TaskModel> deleteTask(int? id) => (super.noSuchMethod(
         Invocation.method(
           #removeTask,
           [id],
@@ -118,7 +104,7 @@ class MockTaskRemoteDataSource extends _i1.Mock
         )),
       ) as _i4.Future<_i2.TaskModel>);
   @override
-  _i4.Future<List<_i2.TaskModel>> viewAllTasks() => (super.noSuchMethod(
+  _i4.Future<List<_i2.TaskModel>> getTasks() => (super.noSuchMethod(
         Invocation.method(
           #viewAllTasks,
           [],
@@ -177,20 +163,6 @@ class MockTaskLocalDataSource extends _i1.Mock
           Invocation.method(
             #updateTask,
             [task],
-          ),
-        )),
-      ) as _i4.Future<_i2.TaskModel>);
-  @override
-  _i4.Future<_i2.TaskModel> completeTask(int? id) => (super.noSuchMethod(
-        Invocation.method(
-          #completeTask,
-          [id],
-        ),
-        returnValue: _i4.Future<_i2.TaskModel>.value(_FakeTaskModel_0(
-          this,
-          Invocation.method(
-            #completeTask,
-            [id],
           ),
         )),
       ) as _i4.Future<_i2.TaskModel>);

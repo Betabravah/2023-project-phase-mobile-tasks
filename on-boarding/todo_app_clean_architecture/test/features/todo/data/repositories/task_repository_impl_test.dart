@@ -103,7 +103,7 @@ void main() {
         () async {
           // arrange
           when(mockRemoteDataSource.getTask(tTaskId))
-              .thenThrow(ServerException());
+              .thenThrow(ServerException(message: "Server error"));
           // act
           final result = await repository.getTask(tTaskId);
           // assert

@@ -91,22 +91,6 @@ class MockTaskRepository extends _i1.Mock implements _i3.TaskRepository {
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Task>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.Task>> completeTask(int? id) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #completeTask,
-          [id],
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Task>>.value(
-            _FakeEither_0<_i5.Failure, _i6.Task>(
-          this,
-          Invocation.method(
-            #completeTask,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Task>>);
-  @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.Task>> removeTask(int? id) =>
       (super.noSuchMethod(
         Invocation.method(

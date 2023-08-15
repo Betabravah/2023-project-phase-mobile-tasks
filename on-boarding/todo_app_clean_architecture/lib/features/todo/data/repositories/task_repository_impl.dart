@@ -20,7 +20,6 @@ class TaskRepositoryImpl implements TaskRepository {
     required this.networkInfo,
   });
 
-
   @override
   Future<Either<Failure, Task>> createTask(Task task) async {
     final taskModel = await localDataSource.createTask(task.toModel());
@@ -51,7 +50,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<Either<Failure, Task>> removeTask(int id) async {
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.removeTask(id);
+        await remoteDataSource.deleteTask(id);
         final taskModel = await localDataSource.removeTask(id);
         return Right(taskModel.toEntity());
       } on ServerException catch (e) {
@@ -62,7 +61,7 @@ class TaskRepositoryImpl implements TaskRepository {
       return Right(taskModel.toEntity());
     }
   }
-  
+
   @override
   Future<Either<Failure, Task>> updateTask(Task task) async {
     if (await networkInfo.isConnected) {
@@ -76,14 +75,13 @@ class TaskRepositoryImpl implements TaskRepository {
       return Right(taskModel.toEntity());
     }
   }
-  
-  
+
   @override
   Future<Either<Failure, List<Task>>> viewAllTasks() async {
     List<TaskModel> taskModels;
 
     if (await networkInfo.isConnected) {
-      taskModels = await remoteDataSource.viewAllTasks();
+      taskModels = await remoteDataSource.getTasks();
     } else {
       taskModels = await localDataSource.viewAllTasks();
     }
@@ -91,6 +89,4 @@ class TaskRepositoryImpl implements TaskRepository {
     final tasks = taskModels.map((e) => e.toEntity()).toList();
     return Right(tasks);
   }
-
-
 }

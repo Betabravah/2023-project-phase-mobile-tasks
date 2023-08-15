@@ -8,8 +8,8 @@ import '../../../../fixtures/fixture_reader.dart';
 void main() {
   final tTaskModel = TaskModel(
     id: 1,
-    title: "Test Title",
-    description: "Test Description",
+    title: "Task 1",
+    description: "Task 1 description",
     dueDate: DateTime.parse('2019-01-01T00:00:00.000'),
     isCompleted: true
   );
@@ -35,8 +35,8 @@ void main() {
       final result = tTaskModel.toJson();
       final expectedMap = {
         "id": 1,
-        "title": "Test Title",
-        "description": "Test Description",
+        "title": "Task 1",
+        "description": "Task 1 description",
         "dueDate": "2019-01-01T00:00:00.000",
         "isCompleted": true
       };
