@@ -42,7 +42,7 @@ void main() {
       updateTask: mockEditTask,
       getTask: mockGetTask,
       getAllTasks: mockViewAllTasks,
-      inputConverter: mockInputConvertor,
+      inputConvertor: mockInputConvertor,
     );
   });
 
@@ -100,7 +100,7 @@ void main() {
       build: () => taskBloc,
       act: (bloc) async {
         when(mockCreateTask(any)).thenAnswer((_) async => Right(tTask));
-       setUpMockInputConvertorSucces();
+        setUpMockInputConvertorSucces();
 
         bloc.add(CreateTaskEvent(
             title: tTask.title,

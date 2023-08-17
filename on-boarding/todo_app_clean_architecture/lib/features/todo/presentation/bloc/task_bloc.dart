@@ -17,7 +17,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final usecases.EditTask updateTask;
   final usecases.RemoveTask deleteTask;
 
-  final InputConverter inputConverter;
+  final InputConverter inputConvertor;
 
   TaskBloc(
       {required this.createTask,
@@ -25,7 +25,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       required this.getAllTasks,
       required this.updateTask,
       required this.deleteTask,
-      required this.inputConverter})
+      required this.inputConvertor})
       : super(InitialState()) {
     //
     //
@@ -64,7 +64,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       emit(LoadingState());
 
       final parsedDate =
-          inputConverter.stringToDateTime(event.dueDate, future: true);
+          inputConvertor.stringToDateTime(event.dueDate, future: true);
 
       parsedDate.fold(
           (failure) => emit(ErrorState(failure.message)), (right) => null);
@@ -92,7 +92,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       emit(LoadingState());
 
       final parsedDate =
-          inputConverter.stringToDateTime(event.dueDate, future: true);
+          inputConvertor.stringToDateTime(event.dueDate, future: true);
 
       parsedDate.fold(
           (failure) => emit(ErrorState(failure.message)), (right) => null);
