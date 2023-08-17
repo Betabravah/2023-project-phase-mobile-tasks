@@ -33,7 +33,7 @@ void main() {
     when(mockTaskRepository.createTask(tTask))
         .thenAnswer((_) async => Right(tTask));
 
-    final result = await usecase(Params(task: tTask));
+    final result = await usecase(CreateParams(task: tTask));
 
     expect(result, Right(tTask));
     verify(mockTaskRepository.createTask(tTask));

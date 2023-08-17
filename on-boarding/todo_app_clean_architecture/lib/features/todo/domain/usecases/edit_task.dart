@@ -1,25 +1,28 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:equatable/equatable.dart';
-import 'package:todo_app_clean_architecture/core/error/failures.dart';
-import 'package:todo_app_clean_architecture/core/usecases/usecase.dart';
-import 'package:todo_app_clean_architecture/features/todo/domain/repositories/task_repository.dart';
 
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecase.dart';
 import '../entities/task.dart';
+import '../repositories/task_repository.dart';
 
-class EditTask implements UseCase<Task, Params> {
+
+class EditTask implements UseCase<Task, EditParams> {
   final TaskRepository repository;
 
   EditTask(this.repository);
 
   @override
-  Future<Either<Failure, Task>> call(Params params) async {
+  Future<Either<Failure, Task>> call(EditParams params) async {
     return await repository.updateTask(params.task);
   }
 }
 
-class Params extends Equatable {
+class EditParams extends Equatable {
   final Task task;
-  Params({required this.task});
+  const EditParams({required this.task});
 
   @override
   List<Object?> get props => [task];

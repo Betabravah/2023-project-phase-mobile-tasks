@@ -31,7 +31,7 @@ void main() {
     when(mockTaskRepository.updateTask(tTask))
         .thenAnswer((_) async => Right(tTask));
 
-    final result = await usecase(Params(task: tTask));
+    final result = await usecase(EditParams(task: tTask));
 
     expect(result, Right(tTask));
     verify(mockTaskRepository.updateTask(tTask));

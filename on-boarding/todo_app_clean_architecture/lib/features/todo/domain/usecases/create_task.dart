@@ -6,22 +6,22 @@ import 'package:todo_app_clean_architecture/features/todo/domain/repositories/ta
 
 import '../entities/task.dart';
 
-class CreateTask implements UseCase<Task, Params> {
+class CreateTask implements UseCase<Task, CreateParams> {
   final TaskRepository repository;
 
   CreateTask(this.repository);
   
   @override
-  Future<Either<Failure, Task>> call(Params params) async {
+  Future<Either<Failure, Task>> call(CreateParams params) async {
     return await repository.createTask(params.task);
   }
 }
 
 
 
-class Params extends Equatable{
+class CreateParams extends Equatable{
   final Task task;
-  Params({ required this.task});
+  const CreateParams({ required this.task});
   
   @override
   List<Object?> get props => [task];

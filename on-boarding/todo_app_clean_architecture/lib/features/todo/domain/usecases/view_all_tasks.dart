@@ -6,12 +6,11 @@ import '../entities/task.dart';
 import '../repositories/task_repository.dart';
 
 class ViewAllTasks implements UseCase<List<Task>, NoParams> {
-    final TaskRepository repository;
+  final TaskRepository repository;
 
   ViewAllTasks(this.repository);
   @override
   Future<Either<Failure, List<Task>>> call(NoParams params) async {
     return await repository.viewAllTasks();
   }
-
 }

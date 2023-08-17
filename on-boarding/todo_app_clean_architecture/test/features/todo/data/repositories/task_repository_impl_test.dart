@@ -109,7 +109,7 @@ void main() {
           // assert
           verify(mockRemoteDataSource.getTask(tTaskId));
           verifyZeroInteractions(mockLocalDataSource);
-          expect(result, equals(Left(ServerFailure())));
+          expect(result, equals(Left(ServerFailure(message: "Server Failure"))));
         },
       );
     });

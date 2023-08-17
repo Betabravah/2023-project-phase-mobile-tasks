@@ -33,15 +33,15 @@ class TaskRepositoryImpl implements TaskRepository {
         final remoteTask = await remoteDataSource.getTask(id);
         localDataSource.cacheTask(remoteTask);
         return Right(remoteTask);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
       }
     } else {
       try {
         final localTask = await localDataSource.getTask(id);
         return Right(localTask);
-      } on CacheException {
-        return Left(CacheFailure());
+      } on CacheException catch (e) {
+        return Left(CacheFailure(message: e.message));
       }
     }
   }
@@ -54,7 +54,7 @@ class TaskRepositoryImpl implements TaskRepository {
         final taskModel = await localDataSource.removeTask(id);
         return Right(taskModel.toEntity());
       } on ServerException catch (e) {
-        return Left(ServerFailure());
+        return Left(ServerFailure(message: e.message));
       }
     } else {
       final taskModel = await localDataSource.removeTask(id);
@@ -68,7 +68,7 @@ class TaskRepositoryImpl implements TaskRepository {
       try {
         return Right(await remoteDataSource.updateTask(task.toModel()));
       } on ServerException catch (e) {
-        return Left(ServerFailure());
+        return Left(ServerFailure(message: e.message));
       }
     } else {
       final taskModel = await localDataSource.updateTask(task.toModel());

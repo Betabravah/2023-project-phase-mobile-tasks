@@ -6,20 +6,20 @@ import 'package:todo_app_clean_architecture/features/todo/domain/repositories/ta
 
 import '../entities/task.dart';
 
-class RemoveTask implements UseCase<Task, Params> {
+class RemoveTask implements UseCase<Task, DeleteParams> {
   final TaskRepository repository;
 
   RemoveTask(this.repository);
 
   @override
-  Future<Either<Failure, Task>> call(Params params) async {
+  Future<Either<Failure, Task>> call(DeleteParams params) async {
     return await repository.removeTask(params.id);
   }
 }
 
-class Params extends Equatable {
+class DeleteParams extends Equatable {
   final int id;
-  Params({required this.id});
+  const DeleteParams({required this.id});
 
   @override
   List<Object?> get props => [id];

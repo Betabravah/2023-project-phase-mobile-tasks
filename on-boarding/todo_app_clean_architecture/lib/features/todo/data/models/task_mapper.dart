@@ -1,4 +1,3 @@
-
 part of 'task_model.dart';
 
 extension TaskMapper on TaskModel {
