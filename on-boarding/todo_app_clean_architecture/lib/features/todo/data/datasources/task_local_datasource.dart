@@ -12,7 +12,7 @@ abstract class TaskLocalDataSource {
   Future<TaskModel> updateTask(TaskModel task);
   Future<TaskModel> removeTask(int id);
   Future<List<TaskModel>> viewAllTasks();
-  Future<void> cacheTask(TaskModel taskToCache);
+  Future<void> cacheTask();
 }
 
 const CACHED_TASK = 'CACHED_TASK';
@@ -30,11 +30,10 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
   }
 
   @override
-  Future<void> cacheTask(TaskModel taskToCache) {
-    // TODO: implement cacheTask
-    throw UnimplementedError();
+  Future<void> cacheTask() async {
+    final tasks = await viewAllTasks();
+    await sharedPreferences.setString(CACHED_TASK, jsonEncode(tasks));
   }
-
 
   @override
   Future<TaskModel> createTask(TaskModel task) async {
@@ -79,17 +78,16 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
     await sharedPreferences.setString(CACHED_TASK, jsonEncode(tasks));
 
     return task;
-
   }
 
   @override
   Future<TaskModel> updateTask(TaskModel task) async {
     final tasks = await viewAllTasks();
-    // ignore: dead_code
+
     for (int i = 0; i < tasks.length; i++) {
       if (tasks[i].id == task.id) {
         tasks[i] = task;
-        await sharedPreferences.setString(CACHED_TASK, jsonEncode([task]));
+        await sharedPreferences.setString(CACHED_TASK, jsonEncode(tasks));
         return task;
       }
     }

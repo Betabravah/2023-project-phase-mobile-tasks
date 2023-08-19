@@ -189,10 +189,10 @@ class MockTaskLocalDataSource extends _i1.Mock
         returnValue: _i4.Future<List<_i2.TaskModel>>.value(<_i2.TaskModel>[]),
       ) as _i4.Future<List<_i2.TaskModel>>);
   @override
-  _i4.Future<void> cacheTask(_i2.TaskModel? taskToCache) => (super.noSuchMethod(
+  _i4.Future<void> cacheTask() => (super.noSuchMethod(
         Invocation.method(
           #cacheTask,
-          [taskToCache],
+          [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

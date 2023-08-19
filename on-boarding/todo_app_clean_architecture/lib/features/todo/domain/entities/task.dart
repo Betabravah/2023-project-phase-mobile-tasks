@@ -8,7 +8,7 @@ class Task extends Equatable {
   final DateTime dueDate;
   final bool isCompleted;
 
-  Task({
+  const Task({
     required this.id,
     required this.title,
     required this.description,

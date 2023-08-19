@@ -32,19 +32,21 @@ final class GetSingleTaskEvent extends TaskEvent {
 }
 
 final class UpdateTaskEvent extends TaskEvent {
+  final int id;
   final String title;
   final String description;
   final String dueDate;
   final bool isCompleted;
 
   const UpdateTaskEvent(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.description,
       required this.dueDate,
       required this.isCompleted});
 
   @override
-  List<Object?> get props => [title, description, dueDate, isCompleted];
+  List<Object?> get props => [id, title, description, dueDate, isCompleted];
 }
 
 final class DeleteTaskEvent extends TaskEvent {

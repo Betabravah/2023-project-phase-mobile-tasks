@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_app_clean_architecture/core/constants/constants.dart';
@@ -9,8 +10,6 @@ import 'package:todo_app_clean_architecture/features/todo/data/datasources/task_
 import 'package:todo_app_clean_architecture/features/todo/data/models/task_model.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
-import 'package:http/http.dart' as http;
-
 import 'task_remote_datasource_test.mocks.dart';
 
 @GenerateMocks([http.Client])

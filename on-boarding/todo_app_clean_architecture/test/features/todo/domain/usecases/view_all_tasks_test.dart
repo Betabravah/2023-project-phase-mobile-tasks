@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_app_clean_architecture/core/usecases/usecase.dart';
+import 'package:todo_app_clean_architecture/features/todo/domain/entities/task.dart';
 import 'package:todo_app_clean_architecture/features/todo/domain/repositories/task_repository.dart';
 import 'package:todo_app_clean_architecture/features/todo/domain/usecases/view_all_tasks.dart';
-import 'package:todo_app_clean_architecture/features/todo/domain/entities/task.dart';
 
 import 'view_all_tasks_test.mocks.dart';
 

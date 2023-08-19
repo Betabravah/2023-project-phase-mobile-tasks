@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:equatable/equatable.dart';
-import 'package:todo_app_clean_architecture/core/usecases/usecase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/usecases/usecase.dart';
+
+import '../../../../core/util/input_convertor.dart';
 import '../../domain/entities/task.dart';
 import '../../domain/usecases/usecases.dart' as usecases;
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/util/input_convertor.dart';
 
 part 'task_event.dart';
 part 'task_state.dart';
@@ -98,7 +98,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           (failure) => emit(ErrorState(failure.message)), (right) => null);
 
       final task = Task(
-          id: -1,
+          id: event.id,
           title: event.title,
           description: event.description,
           isCompleted: false,

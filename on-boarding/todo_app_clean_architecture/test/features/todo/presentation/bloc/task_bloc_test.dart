@@ -120,6 +120,7 @@ void main() {
         setUpMockInputConvertorSucces();
 
         bloc.add(UpdateTaskEvent(
+            id: tTaskId,
             title: tTask.title,
             description: tTask.description,
             dueDate: tDateString,

@@ -94,7 +94,7 @@ void main() {
           await repository.getTask(tTaskId);
           // assert
           verify(mockRemoteDataSource.getTask(tTaskId));
-          verify(mockLocalDataSource.cacheTask(tTaskModel));
+          verify(mockLocalDataSource.cacheTask());
         },
       );
 
@@ -109,7 +109,7 @@ void main() {
           // assert
           verify(mockRemoteDataSource.getTask(tTaskId));
           verifyZeroInteractions(mockLocalDataSource);
-          expect(result, equals(Left(ServerFailure(message: "Server Failure"))));
+          expect(result, equals(const Left(ServerFailure(message: "Server Failure"))));
         },
       );
     });

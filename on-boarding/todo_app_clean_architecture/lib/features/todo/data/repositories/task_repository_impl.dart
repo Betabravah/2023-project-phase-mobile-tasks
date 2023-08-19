@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart' hide Task;
-import 'package:todo_app_clean_architecture/core/error/exceptions.dart';
-import 'package:todo_app_clean_architecture/core/error/failures.dart';
-import 'package:todo_app_clean_architecture/features/todo/data/models/task_model.dart';
-import 'package:todo_app_clean_architecture/features/todo/domain/entities/task.dart';
-import 'package:todo_app_clean_architecture/features/todo/domain/repositories/task_repository.dart';
 
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
+import '../../domain/entities/task.dart';
+import '../../domain/repositories/task_repository.dart';
 import '../datasources/task_local_datasource.dart';
 import '../datasources/task_remote_datasource.dart';
+import '../models/task_model.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
   final TaskRemoteDataSource remoteDataSource;
@@ -31,18 +31,18 @@ class TaskRepositoryImpl implements TaskRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteTask = await remoteDataSource.getTask(id);
-        localDataSource.cacheTask(remoteTask);
+        localDataSource.cacheTask();
         return Right(remoteTask);
       } on ServerException catch (e) {
         return Left(ServerFailure(message: e.message));
       }
     } else {
-      try {
-        final localTask = await localDataSource.getTask(id);
-        return Right(localTask);
-      } on CacheException catch (e) {
-        return Left(CacheFailure(message: e.message));
-      }
+    try {
+      final localTask = await localDataSource.getTask(id);
+      return Right(localTask);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(message: e.message));
+    }
     }
   }
 
@@ -57,8 +57,8 @@ class TaskRepositoryImpl implements TaskRepository {
         return Left(ServerFailure(message: e.message));
       }
     } else {
-      final taskModel = await localDataSource.removeTask(id);
-      return Right(taskModel.toEntity());
+    final taskModel = await localDataSource.removeTask(id);
+    return Right(taskModel.toEntity());
     }
   }
 
@@ -71,8 +71,8 @@ class TaskRepositoryImpl implements TaskRepository {
         return Left(ServerFailure(message: e.message));
       }
     } else {
-      final taskModel = await localDataSource.updateTask(task.toModel());
-      return Right(taskModel.toEntity());
+    final taskModel = await localDataSource.updateTask(task.toModel());
+    return Right(taskModel.toEntity());
     }
   }
 
@@ -81,9 +81,15 @@ class TaskRepositoryImpl implements TaskRepository {
     List<TaskModel> taskModels;
 
     if (await networkInfo.isConnected) {
-      taskModels = await remoteDataSource.getTasks();
+      try {
+        taskModels = await remoteDataSource.getTasks();
+          await localDataSource.cacheTask();
+        
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      }
     } else {
-      taskModels = await localDataSource.viewAllTasks();
+    taskModels = await localDataSource.viewAllTasks();
     }
 
     final tasks = taskModels.map((e) => e.toEntity()).toList();

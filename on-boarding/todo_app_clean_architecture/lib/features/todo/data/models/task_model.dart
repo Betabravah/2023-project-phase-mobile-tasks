@@ -3,7 +3,7 @@ import '../../domain/entities/task.dart';
 part 'task_mapper.dart';
 
 class TaskModel extends Task {
-  TaskModel({
+  const TaskModel({
     required int id,
     required String title,
     required String description,

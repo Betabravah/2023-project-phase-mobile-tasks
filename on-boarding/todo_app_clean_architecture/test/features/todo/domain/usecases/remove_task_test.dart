@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_app_clean_architecture/features/todo/domain/entities/task.dart';
 import 'package:todo_app_clean_architecture/features/todo/domain/repositories/task_repository.dart';
 import 'package:todo_app_clean_architecture/features/todo/domain/usecases/remove_task.dart';
-import 'package:todo_app_clean_architecture/features/todo/domain/entities/task.dart';
 
 import 'remove_task_test.mocks.dart';
 

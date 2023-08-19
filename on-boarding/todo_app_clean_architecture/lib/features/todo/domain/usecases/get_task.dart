@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:equatable/equatable.dart';
+
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../repositories/task_repository.dart';
-
 import '../entities/task.dart';
+import '../repositories/task_repository.dart';
 
 class GetTask implements UseCase<Task, GetParams> {
   final TaskRepository repository;

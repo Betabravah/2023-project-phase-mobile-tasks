@@ -7,6 +7,7 @@ abstract class Failure extends Equatable {
 
 // General Failures
 class CacheFailure extends Failure {
+  @override
   final String message;
 
   const CacheFailure({required this.message}) : super(message: message);
@@ -15,6 +16,7 @@ class CacheFailure extends Failure {
 }
 
 class ServerFailure extends Failure {
+  @override
   final String message;
 
   const ServerFailure({required this.message}) : super(message: message);
@@ -23,7 +25,8 @@ class ServerFailure extends Failure {
 }
 
 class InputValidationFailure extends Failure {
-final String message;
+@override
+  final String message;
 
 const InputValidationFailure({required this.message}) : super(message: message);
 

@@ -1,136 +1,135 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import '../../domain/task.dart';
+import '../../../../injection_container.dart';
+import '../../domain/entities/task.dart';
+import '../bloc/task_bloc.dart';
+import '../widgets/custom_date_field.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/show_status.dart';
 
-// class AddTaskScreen extends StatefulWidget {
-//   const AddTaskScreen({Key? key}) : super(key: key);
+class AddTaskScreen extends StatelessWidget {
+  final Task? task;
+  AddTaskScreen(this.task, {Key? key}) : super(key: key) {
+    if (task != null) {
+      _titleController.text = task!.title;
+      _descriptionController.text = task!.description;
+      _dateController.text = task!.dueDate.toString();
+      _completedController.text = task!.isCompleted.toString();
+    }
+  }
 
-//   @override
-//   _AddTaskScreenState createState() => _AddTaskScreenState();
-// }
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _completedController = TextEditingController();
 
-// class _AddTaskScreenState extends State<AddTaskScreen> {
-//   final TextEditingController _titleController = TextEditingController();
-//   final TextEditingController _descriptionController = TextEditingController();
-//   final TextEditingController _dateController = TextEditingController();
-//   final TextEditingController _priorityController = TextEditingController();
+  void dispatchCreate(BuildContext context) {
+    BlocProvider.of<TaskBloc>(context).add(CreateTaskEvent(
+      title: _titleController.text,
+      description: _descriptionController.text,
+      dueDate: _dateController.text,
+    ));
+  }
 
-//   @override
-//   void dispose() {
-//     _titleController.dispose();
-//     _descriptionController.dispose();
-//     _dateController.dispose();
-//     _priorityController.dispose();
-//     super.dispose();
-//   }
+  void dispatchUpdate(BuildContext context) {
+    BlocProvider.of<TaskBloc>(context).add(UpdateTaskEvent(
+      id: task!.id,
+      title: _titleController.text,
+      description: _descriptionController.text,
+      dueDate: _dateController.text,
+      isCompleted: task!.isCompleted,
+    ));
+  }
 
-//   DateTime? _selectedDate;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Center(
+          child: Text(task == null ? 'New Task' : 'Update Task'),
+        ),
+      ),
+      body: BlocProvider(
+        create: (_) => serviceLocator<TaskBloc>(),
+        child: BlocConsumer<TaskBloc, TaskState>(
+          listener: (context, state) {
+            if (state is ErrorState) {
+              showError(context, state.message);
+            }
 
-//   Future<void> _selectDate() async {
-//     final DateTime? pickedDate = await showDatePicker(
-//       context: context,
-//       initialDate: DateTime.now(),
-//       firstDate: DateTime(2000),
-//       lastDate: DateTime(2100),
-//     );
+            // updated
+            else if (state is UpdatedTaskState) {
+              showSuccess(context, 'Task updated successfully');
+              Navigator.of(context).pop();
+            }
 
-//     if (pickedDate != null) {
-//       setState(() {
-//         _selectedDate = pickedDate;
-//         _dateController.text =
-//             pickedDate.toString(); // Update the text field value
-//       });
-//     }
-//   }
+            // created
+            else if (state is CreatedTaskState) {
+              showSuccess(context, 'Task created successfully');
+              Navigator.of(context).pop();
+            }
+          },
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: IconButton(
-//           icon: const Icon(Icons.arrow_back),
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//         ),
-//         title: const Text('New Task'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             const Image(
-//                 image: AssetImage('assets/images/splash_screen.png'),
-//                 width: 350),
-//             Padding(
-//               padding: const EdgeInsets.all(10.0),
-//               child: TextField(
-//                 key: const Key('title_text_field'),
-//                 controller: _titleController,
-//                 decoration: const InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   labelText: 'Title',
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(10.0),
-//               child: TextField(
-//                 key: const Key('description_text_field'),
-//                 controller: _descriptionController,
-//                 decoration: const InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   labelText: 'Description',
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(10.0),
-//               child: TextField(
-//                 key: const Key('date_text_field'),
-//                 controller: _dateController,
-//                 decoration: InputDecoration(
-//                   border: const OutlineInputBorder(),
-//                   labelText: 'Date',
-//                   suffixIcon: GestureDetector(
-//                     key: const Key('date_picker_icon'),
-//                     onTap: _selectDate, // Show the date picker on tap
-//                     child: const Icon(Icons.calendar_today),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(10.0),
-//               child: TextField(
-//                 key: const Key('priority_text_field'),
-//                 controller: _priorityController,
-//                 decoration: const InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   labelText: 'priority',
-//                 ),
-//               ),
-//             ),
-//             ElevatedButton(
-//               onPressed: () {
-//                 debugPrint("Add Task");
-//                 final String title = _titleController.text;
-//                 final String description = _descriptionController.text;
-//                 final String date = _dateController.text;
-//                 final String priority = _priorityController.text;
-//                 debugPrint(title);
+          //
+          builder: (context, state) => buildForm(context),
+        ),
+      ),
+    );
+  }
 
-//                 final Task newTask = Task(
-//                     title: title,
-//                     description: description,
-//                     date: DateTime.parse(date),
-//                     priority: int.parse(priority));
-//                 Navigator.pop(context, newTask);
-//               },
-//               child: const Text("Add Task"),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  Widget buildForm(context) {
+    return SingleChildScrollView(
+        child: Container(
+      height: MediaQuery.of(context).size.height * .8,
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Image(
+              image: AssetImage('assets/images/add-task.png'), width: 250),
+
+          //
+          CustomTextField(
+            labelText: 'Title',
+            controller: _titleController,
+          ),
+
+          //
+          CustomTextField(
+            labelText: 'Description',
+            controller: _descriptionController,
+          ),
+
+          //
+          CustomDateField(
+            labelText: 'Due Date',
+            controller: _dateController,
+          ),
+
+          //
+          CustomTextField(
+            labelText: 'Completed',
+            controller: _completedController,
+          ),
+
+          //
+          ElevatedButton(
+            onPressed: () => task != null
+                ? dispatchUpdate(context)
+                : dispatchCreate(context),
+            child: Text(
+              task != null ? 'Update task' : 'Add task',
+            ),
+          )
+        ],
+      ),
+    ));
+  }
+}
