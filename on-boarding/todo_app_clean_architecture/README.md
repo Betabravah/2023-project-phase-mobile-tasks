@@ -36,13 +36,31 @@ Page Designs and Logic Flow:
     - Clean Architecture principles to organize your code into presentation, domain, and data layers.
     - A code which is readable, maintainable, and follows best practices.
 
-<img src='assets/images/onboarding.jpg' width=200>
-<img src='assets/images/first-task-list.jpg' width=200>
-<img src='assets/images/create-task.jpg' width=200>
-<img src='assets/images/date-picker.jpg' width=200>
-<img src='assets/images/created-task.jpg' width=200>
-<img src='assets/images/task-detail.jpg' width=200>
-<img src='assets/images/update-task.jpg' width=200>
-<img src='assets/images/updated-task.jpg' width=200>
-<img src='assets/images/delete-task.jpg' width=200>
-<img src='assets/images/deleted-task.jpg' width=200>
+
+
+
+<div class="image-grid">
+  <img src='assets/images/onboarding.jpg' >
+<img src='assets/images/first-task-list.jpg' >
+<img src='assets/images/create-task.jpg' >
+<img src='assets/images/date-picker.jpg' >
+<img src='assets/images/created-task.jpg' >
+<img src='assets/images/task-detail.jpg' >
+<img src='assets/images/update-task.jpg' >
+<img src='assets/images/updated-task.jpg' >
+<img src='assets/images/delete-task.jpg' >
+<img src='assets/images/deleted-task.jpg' >
+</div>
+
+<style>
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.image-grid img {
+  width: 20%;
+  height: auto;
+}
+</style>
