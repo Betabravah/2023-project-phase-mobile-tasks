@@ -1,4 +1,6 @@
-Task Description:
+## Todo Mobile App
+
+Description:
 A Todo app built using the `Flutter TDD Clean Architecture` and `Test Driven Development`.
 - It connects UI components with the Bloc pattern for state management.
 - It applies Clean Architecture principles to maintain separation of concerns and modularity.
@@ -37,30 +39,116 @@ Page Designs and Logic Flow:
     - A code which is readable, maintainable, and follows best practices.
 
 
+### Folder Structure
+```
+lib
+│   bloc_observer.dart
+│   injection_container.dart     
+│   main.dart
+│
+├───core
+│   ├───constants
+│   │       constants.dart       
+│   │
+│   ├───error
+│   │       exceptions.dart      
+│   │       failures.dart        
+│   │
+│   ├───network
+│   │       network_info.dart    
+│   │
+│   ├───usecases
+│   │       usecase.dart
+│   │
+│   └───util
+│           input_convertor.dart 
+│
+└───features
+    └───todo
+        ├───data
+        │   ├───datasources      
+        │   │       task_local_datasource.dart
+        │   │       task_remote_datasource.dart
+        │   │
+        │   ├───models
+        │   │       task_mapper.dart
+        │   │       task_model.dart
+        │   │
+        │   └───repositories
+        │           task_repository_impl.dart
+        │
+        ├───domain
+        │   ├───entities
+        │   │       task.dart
+        │   │       
+        │   ├───repositories
+        │   │       task_repository.dart
+        │   │
+        │   └───usecases
+        │           create_task.dart
+        │           edit_task.dart
+        │           get_task.dart
+        │           remove_task.dart
+        │           usecases.dart
+        │           view_all_tasks.dart
+        │
+        └───presentation
+            ├───bloc
+            │       task_bloc.dart
+            │       task_event.dart
+            │       task_state.dart
+            │
+            ├───screens
+            │       add_task_screen.dart
+            │       onboarding_screen.dart
+            │       task_detail_screen.dart
+            │       task_list_screen.dart
+            │
+            └───widgets
+                    custom_date_field.dart
+                    custom_text_field.dart
+                    loading_widget.dart
+                    show_status.dart
+                    task_feature_container.dart
+                    todo_list.dart
+
+```
 
 
-<div class="image-grid">
-  <img src='assets/images/onboarding.jpg' >
-<img src='assets/images/first-task-list.jpg' >
-<img src='assets/images/create-task.jpg' >
-<img src='assets/images/date-picker.jpg' >
-<img src='assets/images/created-task.jpg' >
-<img src='assets/images/task-detail.jpg' >
-<img src='assets/images/update-task.jpg' >
-<img src='assets/images/updated-task.jpg' >
-<img src='assets/images/delete-task.jpg' >
-<img src='assets/images/deleted-task.jpg' >
+
+
+
+
+### Screenshots
+<div style="display: flex; flex-direction:row; gap: 5px">
+  <img width='180'    
+    src="assets/images/onboarding.jpg"
+  />
+  <img width='180'
+    src="assets/images/first-task-list.jpg"
+  />
+  <img width='180'
+    src="assets/images/create-task.jpg"
+  />
+  <img width='180'
+      src="assets/images/date-picker.jpg"
+    />
+  <img width='180'
+      src="assets/images/created-task.jpg"
+    />
+  <img width='180'
+  src="assets/images/task-detail.jpg"
+  />
+  <img width='180'
+      src="assets/images/update-task.jpg"
+    />
+  <img width='180'
+      src="assets/images/updated-task.jpg"
+    />
+  <img width='180'
+      src="assets/images/delete-task.jpg"
+    />
+  <img width='180'
+      src="assets/images/deleted-task.jpg"
+    />
 </div>
-
-<style>
-.image-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-}
-
-.image-grid img {
-  width: 20%;
-  height: auto;
-}
-</style>
